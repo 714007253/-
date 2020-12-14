@@ -71,7 +71,7 @@
               class="RegisterForm"
               :model="RegisterForm"
               :rules="RegisterRules"
-              ref="RegisterFormRef"
+              ref="RegisterForm"
             >
               <el-form-item prop="Reusername">
                 <el-input
@@ -95,14 +95,13 @@
                 ></el-input>
               </el-form-item>
               <!-- 注册按钮 -->
-              <el-form-item>
-                <el-button
-                  class="RegisterButton"
-                  type="primary"
-                  @click="Register;"
-                  >注册</el-button
-                >
-              </el-form-item>
+
+              <el-button
+                class="RegisterButton"
+                type="primary"
+                @click="Register('RegisterForm')"
+                >注册</el-button
+              >
             </el-form>
             <!-- 跳转选项 -->
             <div class="ToPassword">
@@ -121,7 +120,7 @@
               class="ForgetForm"
               :model="ForgetForm"
               :rules="ForgetRules"
-              ref="ForgetFormRef"
+              ref="ForgetForm"
             >
               <el-form-item prop="phone">
                 <el-input
@@ -169,8 +168,8 @@
 <script>
 export default {
   data() {
-    //   注册验证密码是否输入相同
-    var validatePass = (rule, value, callback) => {
+    // <!--验证密码-->
+    let validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
       } else {
@@ -180,7 +179,8 @@ export default {
         callback();
       }
     };
-    var validatePass2 = (rule, value, callback) => {
+    // <!--二次验证密码-->
+    let validatePass2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请再次输入密码"));
       } else if (value !== this.RegisterForm.pass) {
@@ -259,15 +259,17 @@ export default {
         Reusername: [
           { required: true, message: "登录名称不能为空", trigger: "blur" },
         ],
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
+        pass: [{ required: true, validator: validatePass, trigger: "blur" }],
+        checkPass: [
+          { required: true, validator: validatePass2, trigger: "blur" },
+        ],
       },
 
       // 忘记密码邮箱是否合法
       ForgetRules: {
         phone: [
           { required: true, message: "请输入电话号码", trigger: "blur" },
-          { validator: checkMobile, trigger: "blur" },
+          { validator: checkMobile, trigger: "change" },
         ],
         Verification: [
           { required: true, message: "请输入验证码", trigger: "blur" },
@@ -294,17 +296,19 @@ export default {
     },
 
     // 注册新用户
-    Register(forname) {
-      this.$refs[formName].validate(async (valid) => {
-        if (valid) return;
+    Register(RegisterForm) {
+      this.$refs.RegisterForm.validate(async (valid) => {
+        if (!valid) return;
         // 从页面请求数据
         const { data: res } = await this.$http.post(
           "registeradmin",
-          this.RegisterRules
+          this.RegisterForm
         );
-        if (res.meta.status !== 200)
-          return this.$message.error("创建新用户成功");
-        this.$message.success("创建新用户成功");
+        console.log(res);
+        if (res.meta.status !== 201) return this.$message.error("注册用户失败");
+        this.$message.success("注册用户成功");
+
+        //页面完成跳转
         this.PasswordVisible = false;
         this.RegisterVisible = true;
       });
@@ -312,7 +316,7 @@ export default {
 
     // 忘记密码-登录
     Forget() {
-      this.$refs.ForgetFormRef.validate(async (valid) => {
+      this.$refs.ForgetForm.validate(async (valid) => {
         if (!valid) return;
         // 从页面请求数据
         const { data: res } = await this.$http.post(

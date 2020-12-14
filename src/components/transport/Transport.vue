@@ -29,6 +29,9 @@
               <el-input
                 v-model="queryInfo.query"
                 placeholder="请输入您要搜索的运输单号"
+                clearable
+                @clear="getTransportList"
+                @keyup.enter.native="getTransportList"
               ></el-input>
             </el-form-item>
             <el-form-item label="状态" class="select">
@@ -39,6 +42,7 @@
                 <el-option label="已送达" value="4"></el-option>
               </el-select>
             </el-form-item>
+
             <el-form-item class="search">
               <el-button type="primary" @click="getTransportList"
                 >查询</el-button
@@ -64,91 +68,85 @@
       <div slot="header" class="clearfix">
         <span><strong>数据列表</strong> </span>
         <!-- 表格 -->
-        <el-card class="box-card2">
-          <!-- 表单区域 -->
-          <el-table :data="transportslist" stripe style="width: 100%" border>
-            <!-- 数据表单 -->
-            <el-table-column type="selection" width="55"> </el-table-column>
-
-            <el-table-column prop="TransportOrder" label="运输单号" width="160">
-            </el-table-column>
-
-            <el-table-column
-              prop="ShippingAddress"
-              label="发货地址"
-              width="100"
-            >
-            </el-table-column>
-
-            <el-table-column prop="CollectionTime" label="揽收时间" width="110">
-            </el-table-column>
-
-            <el-table-column prop="Destination" label="送达目的地" width="100">
-            </el-table-column>
-
-            <el-table-column
-              prop="AgreedDeliveryTime"
-              label="约定送达时间"
-              width="110"
-            >
-            </el-table-column>
-
-            <el-table-column prop="State" label="状态" width="110">
-            </el-table-column>
-
-            <el-table-column
-              prop="ActualDeliveryTime"
-              label="实际送达时间"
-              width="110"
-            >
-            </el-table-column>
-
-            <el-table-column
-              prop="SavedTime"
-              label="已保存时间/保存有效期(小时)"
-              width="220"
-            >
-            </el-table-column>
-
-            <!-- 操作区 -->
-            <el-table-column fixed="right" width="210" label="操作区">
-              <template slot-scope="scope">
-                <!-- 查看按钮 -->
-                <el-button
-                  size="mini"
-                  @click="showEditDialog(scope.row.id)"
-                  type="primary"
-                >
-                  查看
-                </el-button>
-                <!-- 编辑按钮 -->
-                <el-button size="mini" @click="changeEditDialog(scope.row.id)">
-                  编辑
-                </el-button>
-                <!-- 删除按钮 -->
-                <el-button
-                  size="mini"
-                  type="danger"
-                  @click="removeUserById(scope.row.id)"
-                  >删除
-                </el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-
-          <!-- 分页区域 -->
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="queryInfo.pagenum"
-            :page-sizes="[1, 2, 5, 10]"
-            :page-size="queryInfo.pagesize"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total"
-          >
-          </el-pagination>
-        </el-card>
       </div>
+      <!-- 表单区域 -->
+      <el-table :data="transportslist" stripe style="width: 100%" border>
+        <!-- 数据表单 -->
+        <el-table-column type="selection" width="55"> </el-table-column>
+
+        <el-table-column prop="TransportOrder" label="运输单号" width="160">
+        </el-table-column>
+
+        <el-table-column prop="ShippingAddress" label="发货地址" width="100">
+        </el-table-column>
+
+        <el-table-column prop="CollectionTime" label="揽收时间" width="110">
+        </el-table-column>
+
+        <el-table-column prop="Destination" label="送达目的地" width="100">
+        </el-table-column>
+
+        <el-table-column
+          prop="AgreedDeliveryTime"
+          label="约定送达时间"
+          width="110"
+        >
+        </el-table-column>
+
+        <el-table-column prop="State" label="状态" width="110">
+        </el-table-column>
+
+        <el-table-column
+          prop="ActualDeliveryTime"
+          label="实际送达时间"
+          width="110"
+        >
+        </el-table-column>
+
+        <el-table-column
+          prop="SavedTime"
+          label="已保存时间/保存有效期(小时)"
+          width="220"
+        >
+        </el-table-column>
+
+        <!-- 操作区 -->
+        <el-table-column fixed="right" width="210" label="操作区">
+          <template slot-scope="scope">
+            <!-- 查看按钮 -->
+            <el-button
+              size="mini"
+              @click="showEditDialog(scope.row.id)"
+              type="primary"
+            >
+              查看
+            </el-button>
+            <!-- 编辑按钮 -->
+            <el-button size="mini" @click="changeEditDialog(scope.row.id)">
+              编辑
+            </el-button>
+            <!-- 删除按钮 -->
+            <el-button
+              size="mini"
+              type="danger"
+              @click="removeUserById(scope.row.id)"
+              >删除
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <!-- 分页区域 -->
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="queryInfo.pagenum"
+        :page-sizes="[1, 2, 5, 10]"
+        :page-size="queryInfo.pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -174,138 +172,31 @@ export default {
       // 运输管理表单
       transportslist: [
         {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
-        },
-        {
-          TransportOrder: "DD20200909001",
-          ShippingAddress: "杭州",
-          CollectionTime: "2020-09-09 12:00:00",
-          Destination: "研究所",
-          AgreedDeliveryTime: "2020-09-09 12:00:00",
-          State: "已送达",
-          ActualDeliveryTime: "2020-09-09 11:00:00",
-          SavedTime: "2/120",
+          TransportOrder: "",
+          ShippingAddress: "",
+          CollectionTime: "",
+          Destination: "",
+          AgreedDeliveryTime: "",
+          State: "",
+          ActualDeliveryTime: "",
+          SavedTime: "",
         },
       ],
     };
   },
-
+  created() {
+    this.getTransportList();
+  },
   methods: {
     // 运输管理函数获取数据
     async getTransportList() {
-      const { data: res } = await this.$http.post("Transport", {
+      const { data: res } = await this.$http.get("Transport", {
         params: this.queryInfo,
       });
       if (res.meta.status !== 200)
         return this.$message.error("获取运输表单数据失败");
       this.transportslist = res.data.transports;
+      this.total = res.data.total;
       console.log(res);
     },
     // 新增订单
@@ -392,7 +283,7 @@ export default {
 .box-card2 {
   position: relative;
   top: 45px;
-  height: 1450px;
+  height: 1930px;
 }
 .clearfix {
   color: #999999;
@@ -410,8 +301,9 @@ export default {
 .search {
   position: relative;
   top: -10px;
-  left: 70px;
+  left: 55px;
 }
+
 .add {
   position: relative;
   top: -73px;

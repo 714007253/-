@@ -345,9 +345,8 @@
         </el-aside>
         <el-container>
           <el-main class="Main"> <router-view></router-view></el-main>
-          <el-footer class="Footer">
-            <div class="copyright">© 2020 美橙西西版权所有</div></el-footer
-          >
+
+          <div class="copyright">© 2020 美橙西西版权所有</div>
         </el-container>
       </el-container>
     </el-container>
@@ -507,21 +506,15 @@ a:hover {
   position: relative;
   top: 10px;
   background-color: #f5f5f5;
-  height: 1696px;
+  height: 2230px;
   width: 1223px;
 }
-.Footer {
-  background-color: #f5f5f5;
-  position: relative;
-  top: 10px;
-  height: 100px;
-  width: 1223px;
-}
+
 .copyright {
   color: #cccccc;
-  position: relative;
-  left: 470px;
-  top: 30px;
+  position: absolute;
+  left: 675px;
+  top: 2270px;
 }
 // 主体样式end
 // 头部样式start

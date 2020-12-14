@@ -14,6 +14,7 @@
       </el-breadcrumb>
     </el-card>
     <!-- 4个可视化计数模块 -->
+    <!-- 在线记录仪 -->
     <el-card class="Data1"
       ><div class="Data1_1">
         <span class="Data1_4">{{ homelist.Data1_3 }}</span>
@@ -23,6 +24,7 @@
         <span>在线记录仪</span>
       </div></el-card
     >
+    <!-- 报警中 -->
     <el-card class="Data1"
       ><div class="Data1_1">
         <span class="Data1_4">{{ homelist.Data1_7 }}</span>
@@ -31,6 +33,7 @@
         <span class="Point2">●</span><span>报警中</span>
       </div></el-card
     >
+    <!-- 持续保存时间即将失效 -->
     <el-card class="Data1"
       ><div class="Data1_1">
         <span class="Data1_4">{{ homelist.Data1_9 }}</span>
@@ -39,6 +42,7 @@
         <span class="Point3">●</span><span>持续保存时间即将失效</span>
       </div></el-card
     >
+    <!-- 已送达 -->
     <el-card class="Data1"
       ><div class="Data1_1">
         <span class="Data1_4">{{ homelist.Data1_11 }}</span>
@@ -47,21 +51,37 @@
         <span class="Point4">●</span><span>已送达</span>
       </div></el-card
     >
+
+    <!-- 记录仪物流状态 -->
     <el-card class="Data2">
       <div class="Data2_1"><span class="Data2_2">记录仪物流状态</span></div>
+      <div id="RecorderData">
+        <RecorderData></RecorderData>
+      </div>
     </el-card>
+
+    <!-- 记录仪报警统计 -->
     <el-card class="Data2">
       <div class="Data2_1">
         <span class="Data2_2">记录仪报警统计</span>
-        <el-form ref="FormChoiceRef" :model="FormChoice">
-          <el-form-item prop="chioce">
-            <el-select class="select" v-model="chioce">
-              <el-option label="全部" value="1"></el-option>
-              <el-option label="记录仪编号1" value="2"></el-option>
-              <el-option label="记录仪编号2" value="3"></el-option>
+        <!-- 选择显示的数据对应的仪器 -->
+        <el-form :model="options">
+          <el-form-item>
+            <el-select class="select" v-model="options.value">
+              <el-option
+                v-for="item in option"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
             </el-select>
           </el-form-item>
         </el-form>
+
+        <div id="RecorderDangerData">
+          <RecorderDangerData></RecorderDangerData>
+        </div>
       </div>
     </el-card>
 
@@ -85,47 +105,58 @@
 </template>
 
 <script>
+// 这里导入数据可视化组件
+import RecorderDangerData from "../componentview/RecorderDangerData.vue";
+import RecorderData from "../componentview/RecorderData.vue";
 export default {
   data() {
     return {
       homelist: {
-        Data1_3: "9",
-        Data1_4: "10",
-        Data1_7: "1",
-        Data1_8: "10",
-        Data1_9: "1",
-        Data1_10: "10",
-        Data1_11: "2",
-        Data1_12: "10",
+        // 八个数据显示参数
+        Data1_3: "",
+        Data1_4: "",
+        Data1_7: "",
+        Data1_8: "",
+        Data1_9: "",
+        Data1_10: "",
+        Data1_11: "",
+        Data1_12: "",
       },
       // 原始四个计数板数据
       queryInfo: {},
-
-      chioce: "",
-      // 获取首页的参数对象
+      FormChoice: {},
+      groups: "",
+      // 统计仪下拉菜单接口
+      options: {
+        value: "",
+      },
+      value: null,
+      option: [],
     };
   },
-
-  components: {},
 
   created() {
     this.getWelcomeList();
   },
 
-  mounted: {},
-
   methods: {
-    // 首页函数获取数据
+    // 首页四个数组获取数据
     async getWelcomeList() {
-      const { data: res } = await this.$http.post("Welcome");
+      const { data: res } = await this.$http.get("Welcome");
       if (res.meta.status !== 200)
         return this.$message.error("获取首页数据失败");
-      this.homelist = res.data.homedatas;
+      this.homelist = res.homedatas;
+      this.option = res.option;
       console.log(res);
     },
   },
+  components: {
+    RecorderDangerData: RecorderDangerData,
+    RecorderData: RecorderData,
+  },
 };
 </script>
+
 <style lang='less' scoped>
 .Data1 {
   margin: 14px;
@@ -243,5 +274,19 @@ export default {
   top: -45px;
   font-size: 23px;
   color: black;
+}
+#RecorderData {
+  position: absolute;
+  left: 0px;
+  top: 59px;
+  width: 565px;
+  height: 315px;
+}
+#RecorderDangerData {
+  position: absolute;
+  left: -5px;
+  top: 80px;
+  width: 565px;
+  height: 320px;
 }
 </style>

@@ -1,0 +1,111 @@
+.box-card {
+    position: relative;
+    top: 13px;
+  }
+  .box-card2 {
+    height: 2005px;
+    position: relative;
+    top: 25px;
+  }
+  .BasicInformation {
+    margin-bottom: 25px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+  }
+  .BasicIfTtile {
+    color: black;
+  }
+  .BasicIfpoint {
+    color: #ff3b30;
+    position: relative;
+    left: 995px;
+  }
+  .BasicIfTtile2 {
+    font-size: 14px;
+    color: #999999;
+    position: relative;
+    left: 995px;
+  }
+  .CargoDetails {
+    margin-bottom: 10px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+  }
+  .CargoDetailsTitle {
+    color: black;
+  }
+  .CargoDetailsAdd {
+    position: relative;
+    top: -3px;
+    left: 990px;
+    height: 14px;
+    text-align: center;
+    line-height: 7px!important;
+  }
+  .AOTRecorder {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+  }
+  .AOTRecorderTitle {
+    color: black;
+  }
+  .AOTRecordersAdd {
+    position: relative;
+    top: -3px;
+    left: 940px;
+    height: 14px;
+    text-align: center;
+    line-height: 7px!important;
+  }
+  .ShippingInf {
+    height: 74px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  .ShippingInfTime {
+    position: relative;
+    left: -185px;
+    top: -8px;
+    font-size: 18px;
+  }
+  .ShippingInfTitle {
+    position: relative;
+    left: -280px;
+    top: 28px;
+  }
+  .ShippingInfCheck {
+    position: relative;
+    left: 695px;
+  }
+  .ShippingInf2 {
+    height: 30px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  .ShippingInfTitle2 {
+    position: relative;
+    left: 5px;
+    top: -5px;
+  }
+  .ShippingInfCheck2 {
+    position: relative;
+    left: 975px;
+  }
+  .Add {
+    position: relative;
+    left: 375px;
+    top: -5px;
+    width: 120px;
+    height: 40px;
+  }
+  .Recover {
+    position: relative;
+    left: 440px;
+    top: -5px;
+    width: 120px;
+    height: 40px;
+  }

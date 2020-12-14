@@ -1,24 +1,22 @@
-<!-- 创建新订单 -->
+<!-- 新增订单 -->
 <template>
   <div>
     <el-card>
+      <!-- 导航 -->
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/Welcome' }"
           ><strong>首页</strong>
         </el-breadcrumb-item>
-        <el-breadcrumb-item><strong>运输管理</strong> </el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/Transport' }"
+          ><strong>运输管理</strong>
+        </el-breadcrumb-item>
         <el-breadcrumb-item><strong>创建订单</strong> </el-breadcrumb-item>
-        <el-button class="RefreshBox" @click="getTransportList"
-          ><img src="../images/刷新.svg" class="RefreshImg" />
-          <span class="RefreshTitle">刷新 </span>
-        </el-button>
       </el-breadcrumb>
     </el-card>
-
+    <!-- 表头 -->
     <el-card class="box-card">
       <span><strong>新增运输单</strong></span>
     </el-card>
-
     <el-card class="box-card2">
       <!-- 表单一 -->
       <el-form
@@ -30,9 +28,9 @@
       >
         <!-- 基础信息 -->
         <div class="BasicInformation">
-          <span>基础信息</span>
-          <span>*</span>
-          <span>为必填项</span>
+          <span class="BasicIfTtile">基础信息</span>
+          <span class="BasicIfpoint">*</span>
+          <span class="BasicIfTtile2">为必填项</span>
         </div>
         <!-- 第一行 -->
         <el-row :gutter="60">
@@ -56,13 +54,11 @@
           </el-col>
           <!-- 托运人-->
           <el-col :span="8">
-            <el-form-item label="托运人">
-              <el-form-item prop="shipper">
-                <el-input
-                  placeholder="请填写托运人姓名"
-                  v-model="addForm.shipper"
-                ></el-input>
-              </el-form-item>
+            <el-form-item label="托运人" prop="shipper">
+              <el-input
+                placeholder="请填写托运人姓名"
+                v-model="addForm.shipper"
+              ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -70,7 +66,7 @@
         <el-row :gutter="60">
           <!-- 运输ID -->
           <el-col :span="8">
-            <el-form-item label="运输ID" prop="addForm.IDTransportation">
+            <el-form-item label="运输ID" prop="IDTransportation">
               <el-input
                 v-model="addForm.IDTransportation"
                 placeholder="请输入货件名称"
@@ -80,7 +76,7 @@
           </el-col>
           <!-- 运输方式 -->
           <el-col :span="8">
-            <el-form-item label="运输方式" prop="addForm.TypeOfShipping">
+            <el-form-item label="运输方式" prop="TypeOfShipping">
               <el-select v-model="addForm.TypeOfShipping">
                 <el-option label="航空" value="1"></el-option>
                 <el-option label="铁路" value="2"></el-option>
@@ -91,8 +87,8 @@
           </el-col>
           <!-- 运输状态-->
           <el-col :span="8">
-            <el-form-item label="运输状态" prop="addForm.TransportStatus">
-              <el-select v-model="addForm.TypeOfShipping">
+            <el-form-item label="运输状态" prop="TransportStatus">
+              <el-select v-model="addForm.TransportStatus">
                 <el-option label="未开始" value="1"></el-option>
                 <el-option label="运送中" value="2"></el-option>
                 <el-option label="已完成" value="3"></el-option>
@@ -104,7 +100,7 @@
         <!-- 收货人 -->
         <el-row>
           <el-col :span="8">
-            <el-form-item label="收货人" prop="addForm.consignee">
+            <el-form-item label="收货人" prop="consignee">
               <el-input
                 v-model="addForm.consignee"
                 placeholder="请填写收货人姓名"
@@ -120,7 +116,7 @@
             <el-input
               type="textarea"
               placeholder="请输入内容"
-              v-model="addForm.experiment9"
+              v-model="addForm.text"
               maxlength="200"
               show-word-limit
               rows="7"
@@ -128,99 +124,22 @@
             </el-input>
           </el-form-item>
         </el-row>
-
         <!-- 货物详情 -->
-        <div class="CargoDetails">
-          <span>货物详情</span>
-          <el-button @click="">新增</el-button>
-        </div>
-        <el-table :data="CargorList" stripe>
-          <!-- 报价单表单 -->
-          <el-table-column type="selection" width="55"> </el-table-column>
-          <el-table-column prop="coffer1" label="冷链包ID" width="120">
-          </el-table-column>
-          <el-table-column prop="coffer2" label="集装箱ID" width="120">
-          </el-table-column>
-          <el-table-column prop="coffer3" label="数量(单位)" width="120">
-          </el-table-column>
-          <el-table-column prop="coffer4" label="长(单位)" width="120">
-          </el-table-column>
-          <el-table-column prop="coffer5" label="宽(单位)" width="120">
-          </el-table-column>
-          <el-table-column prop="coffer6" label="高(单位)" width="120">
-          </el-table-column>
-          <el-table-column prop="coffer7" label="重量(单位)" width="120">
-          </el-table-column>
-          <el-table-column prop="coffer7" label="抛重(单位)" width="120">
-          </el-table-column>
-
-          <!-- 操作区 -->
-          <el-table-column label="操作" width="170">
-            <template slot-scope="scope">
-              <!-- 编辑按钮 -->
-              <el-button size="mini" @click="changeEditDialog(scope.row.id)">
-                编辑
-              </el-button>
-              <!-- 删除按钮 -->
-              <el-button
-                size="mini"
-                type="danger"
-                @click="removeEditById(scope.row.id)"
-                >删除
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+        <CargoDetails></CargoDetails>
 
         <!-- 温度记录仪授权 -->
-        <div class="AOTRecorder">
-          <span>温度记录仪授权</span>
-          <el-button @click="">新增</el-button>
-        </div>
-        <el-table :data="AOTRecorder" stripe>
-          <!-- 报价单表单 -->
-          <el-table-column type="selection" width="55"> </el-table-column>
-          <el-table-column prop="AOTRecorder" label="记录仪编号" width="120">
-          </el-table-column>
-          <el-table-column prop="AOTRecorder" label="添加日期" width="120">
-          </el-table-column>
+        <AOTRecorder></AOTRecorder>
 
-          <!-- 操作区 -->
-          <el-table-column label="操作" width="170">
-            <template slot-scope="scope">
-              <!-- 编辑按钮 -->
-              <el-button
-                size="mini"
-                @click="changeAOTRecorderDialog(scope.row.id)"
-              >
-                编辑
-              </el-button>
-              <!-- 删除按钮 -->
-              <el-button
-                size="mini"
-                type="danger"
-                @click="removeAOTRecorderById(scope.row.id)"
-                >删除
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-form>
-      <!-- 表单二 -->
-      <!-- 发货信息 -->
-      <div class="ShippingInformation">
-        <img src="../images/qibiao.svg" alt="" />
-        <span>{{ create.time }}</span>
-        <span>发货信息</span>
-        <el-radio v-model="" label="2">数据联网</el-radio>
-      </div>
-      <el-form
-        label-position="top"
-        :model="ShippingIfForm"
-        :rules="ShippingIfFormRules"
-        ref="ShippingIfFormRef"
-        label-width="70px"
-      >
+        <!-- 表单二 -->
+        <!-- 发货信息 -->
+        <div class="ShippingInf">
+          <img src="../images/qibiao.svg" alt="" />
+          <span class="ShippingInfTime">{{ createtime }}</span>
+          <span class="ShippingInfTitle">发货信息</span>
+          <el-checkbox class="ShippingInfCheck" v-model="addForm.inline"
+            >数据联网</el-checkbox
+          >
+        </div>
         <!-- 第一行 -->
         <el-row :gutter="60">
           <!-- 公司名称 -->
@@ -228,59 +147,48 @@
             <el-form-item label="公司名称" prop="CorporateName">
               <el-input
                 placeholder="请填写疫苗/药品公司详细地址"
-                v-model="ShippingIfForm.CorporateName"
+                v-model="addForm.CorporateName"
               ></el-input>
             </el-form-item>
           </el-col>
+          <!-- 国家/省份 -->
+          <el-col :span="8">
+            <el-form-item label="国家/省份/市区" prop="country">
+              <el-cascader
+                v-model="addForm.country"
+                :options="options"
+              ></el-cascader>
+            </el-form-item>
+          </el-col>
+          <!-- 公司详细地址 -->
           <el-col :span="8">
             <el-form-item label="公司详细地址" prop="CompanyAddress">
               <el-input
                 placeholder="请填写发货方公司详细地址"
-                v-model="ShippingIfForm.CompanyAddress"
+                v-model="addForm.CompanyAddress"
               ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <!-- 第二行 -->
         <el-row :gutter="60">
-          <!-- 国家/省份 -->
-          <el-col :span="8">
-            <el-form-item label="国家/省份" prop="ShippingIfForm.country">
-              <el-cascader
-                v-model="ShippingIfForm.country"
-                :options="options"
-              ></el-cascader>
-            </el-form-item>
-          </el-col>
-          <!-- 市/区 -->
-          <el-col :span="8">
-            <el-form-item label="市/区" prop="ShippingIfForm.city">
-              <el-cascader
-                v-model="ShippingIfForm.city"
-                :options="options"
-              ></el-cascader>
-            </el-form-item>
-          </el-col>
           <!-- 邮政编码 -->
           <el-col :span="8">
             <el-form-item label="邮政编码" prop="PostalCode">
               <el-input
                 placeholder="请填写发货地邮政编码"
-                v-model="ShippingIfForm.PostalCode"
+                v-model="addForm.PostalCode"
               ></el-input>
             </el-form-item>
           </el-col>
-        </el-row>
-        <!-- 第三行 -->
-        <el-row :gutter="60">
           <!-- 规定发货时间 -->
           <el-col :span="8">
             <el-form-item label="规定发货时间" required>
-              <el-form-item prop="ShippingIfForm.time">
+              <el-form-item prop="time">
                 <el-date-picker
                   type="date"
                   placeholder="请选择日期时间"
-                  v-model="ShippingIfForm.time"
+                  v-model="addForm.time"
                   style="width: 100%"
                 >
                 </el-date-picker>
@@ -288,20 +196,14 @@
             </el-form-item>
           </el-col>
         </el-row>
-      </el-form>
-      <!-- 表单三 -->
-      <!-- 收货信息 -->
-      <div class="ReceivingIF">
-        <span>发货信息</span>
-        <el-radio v-model="" label="2">数据联网</el-radio>
-      </div>
-      <el-form
-        label-position="top"
-        :model="ReceivingIFForm"
-        :rules="ReceivingIFFormRules"
-        ref="ReceivingIFFormRef"
-        label-width="70px"
-      >
+        <!-- 表单三 -->
+        <!-- 收货信息 -->
+        <div class="ShippingInf2">
+          <span class="ShippingInfTitle2">收货信息</span>
+          <el-checkbox class="ShippingInfCheck2" v-model="addForm.inline2"
+            >数据联网</el-checkbox
+          >
+        </div>
         <!-- 第一行 -->
         <el-row :gutter="60">
           <!-- 公司名称 -->
@@ -309,59 +211,48 @@
             <el-form-item label="公司名称" prop="CorporateName2">
               <el-input
                 placeholder="请填写疫苗/药品公司详细地址"
-                v-model="ReceivingIF.CorporateName2"
+                v-model="addForm.CorporateName2"
               ></el-input>
             </el-form-item>
           </el-col>
+          <!-- 国家/省份 -->
+          <el-col :span="8">
+            <el-form-item label="国家/省份/市/区" prop="country2">
+              <el-cascader
+                v-model="addForm.country2"
+                :options="options"
+              ></el-cascader>
+            </el-form-item>
+          </el-col>
+          <!-- 公司详细地址 -->
           <el-col :span="8">
             <el-form-item label="公司详细地址" prop="CompanyAddress2">
               <el-input
                 placeholder="请填写收货方公司详细地址"
-                v-model="ReceivingIF.CompanyAddress2"
+                v-model="addForm.CompanyAddress2"
               ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <!-- 第二行 -->
         <el-row :gutter="60">
-          <!-- 国家/省份 -->
-          <el-col :span="8">
-            <el-form-item label="国家/省份" prop="ShippingIfForm.country2">
-              <el-cascader
-                v-model="ReceivingIF.country2"
-                :options="options"
-              ></el-cascader>
-            </el-form-item>
-          </el-col>
-          <!-- 市/区 -->
-          <el-col :span="8">
-            <el-form-item label="市/区" prop="ReceivingIF.city2">
-              <el-cascader
-                v-model="ReceivingIF.city2"
-                :options="options"
-              ></el-cascader>
-            </el-form-item>
-          </el-col>
           <!-- 邮政编码 -->
           <el-col :span="8">
             <el-form-item label="邮政编码" prop="PostalCode2">
               <el-input
                 placeholder="请填写收货地邮政编码"
-                v-model="ReceivingIF.PostalCode2"
+                v-model="addForm.PostalCode2"
               ></el-input>
             </el-form-item>
           </el-col>
-        </el-row>
-        <!-- 第三行 -->
-        <el-row :gutter="60">
-          <!-- 规定发货时间 -->
+          <!-- 规定收货时间 -->
           <el-col :span="8">
-            <el-form-item label="规定发货时间" required>
+            <el-form-item label="规定收货时间" required>
               <el-form-item prop="time2">
                 <el-date-picker
                   type="date"
                   placeholder="请选择日期时间"
-                  v-model="ReceivingIF.time2"
+                  v-model="addForm.time2"
                   style="width: 100%"
                 >
                 </el-date-picker>
@@ -372,124 +263,180 @@
           <el-col :span="8">
             <el-form-item label="手机号码" prop="phone">
               <el-input
-                placeholder="请填写发货人手机号码"
-                v-model="ReceivingIF.phone"
+                placeholder="请填写收货人手机号码"
+                v-model="addForm.phone"
               ></el-input>
             </el-form-item>
           </el-col>
+        </el-row>
+        <!-- 第三行 -->
+        <el-row :gutter="60">
           <!-- 收货人姓名 -->
           <el-col :span="8">
             <el-form-item label="收货人姓名" prop="name">
               <el-input
                 placeholder="请填写收货人姓名"
-                v-model="ReceivingIF.name"
+                v-model="addForm.name"
               ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
+
+        <!-- 保存与重置 -->
+        <el-button type="primary" class="Add" @click="ADDtransport"
+          >保存</el-button
+        >
+        <el-button class="Recover" @click="Recover">重置</el-button>
       </el-form>
-      <!-- 保存与重置 -->
-      <el-button type="primary" class="" @click="">保存</el-button>
-      <el-button class="" @click="">重置</el-button>
     </el-card>
-
-    <!-- 新增货物详情的对话框 -->
-    <el-dialog
-      title="新增"
-      :visible.sync="addDialogVisible"
-      width="50%"
-      @close="addDialogClosed"
-      :append-to-body="true"
-    >
-      <!-- 内容主体 -->
-      <el-form :model="addForms" ref="addFormRef" label-width="100px">
-        <el-form-item label="产品ID" prop="coffer1">
-          <el-input v-model="addForms.coffer1"></el-input>
-        </el-form-item>
-        <el-form-item label="集装箱ID" prop="coffer2">
-          <el-input v-model="addForms.coffer2"></el-input>
-        </el-form-item>
-        <el-form-item label="数量" prop="coffer3">
-          <el-input v-model="addForms.coffer3"></el-input>
-        </el-form-item>
-        <el-form-item label="长*宽*高" prop="coffer4">
-          <el-input v-model="addForms.coffer4"></el-input>
-        </el-form-item>
-        <el-form-item label="产品金额小计" prop="coffer5">
-          <el-input v-model="addForms.coffer5"></el-input>
-        </el-form-item>
-        <el-form-item label="重量" prop="coffer6">
-          <el-input v-model="addForms.coffer6"></el-input>
-        </el-form-item>
-        <el-form-item label="抛重" prop="coffer7">
-          <el-input v-model="addForms.coffer7"></el-input>
-        </el-form-item>
-      </el-form>
-      <!-- 底部区域 -->
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="adddata">确 定</el-button>
-      </span>
-    </el-dialog>
-
-    <!-- 新增温度记录仪授权的对话框 -->
-    <el-dialog
-      title="新增"
-      :visible.sync="addDialogVisible"
-      width="50%"
-      @close="addDialogClosed"
-      :append-to-body="true"
-    >
-      <!-- 内容主体 -->
-      <el-form :model="addForms" ref="addFormRef" label-width="100px">
-        <el-form-item label="记录仪编号" prop="coffer1">
-          <el-input v-model="addForms.coffer1"></el-input>
-        </el-form-item>
-        <el-form-item label="添加日期" prop="coffer2">
-          <el-input v-model="addForms.coffer2"></el-input>
-        </el-form-item>
-      </el-form>
-      <!-- 底部区域 -->
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="adddata">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
+import CargoDetails from "../componentview/CargoDetails.vue";
+import AOTRecorder from "../componentview/AOTRecorder.vue";
 export default {
   data() {
-    return {};
+    return {
+      // 表单一数据定义
+      addForm: {
+        // 表一
+        NameOfGoods: "",
+        CourierNumber: "",
+        shipper: "",
+        IDTransportation: "",
+        TypeOfShipping: "",
+        TypeOfShipping: "",
+        consignee: "",
+        text: "",
+        inline: "",
+        inline2: "", //确定是否数据联网
+        // 表二
+        CorporateName: "",
+        CompanyAddress: "",
+        country: "",
+        PostalCode: "",
+        time: "",
+        // 表三
+        CorporateName2: "",
+        CompanyAddress2: "",
+        country2: "",
+        PostalCode2: "",
+        time2: "",
+        phone: "",
+        name: "",
+      },
+      //   获取创建时间
+      createtime: "",
+      //   下拉菜单一
+      value: [],
+      options: [],
+      // 表单一验证规则
+      addFormRules: {
+        CourierNumber: [
+          { required: true, message: "请输入快递单号", trigger: "blur" },
+        ],
+        NameOfGoods: [
+          { required: true, message: "请输入货件名称", trigger: "blur" },
+        ],
+        shipper: [
+          { required: true, message: "请填写托运人姓名", trigger: "blur" },
+        ],
+        TransportStatus: [
+          { required: true, message: "请填写运输状态", trigger: "blur" },
+        ],
+        IDTransportation: [
+          { required: true, message: "请输入货件名称", trigger: "blur" },
+        ],
+        TypeOfShipping: [
+          { required: true, message: "请选择运输方式", trigger: "blur" },
+        ],
+        consignee: [
+          { required: true, message: "请填写收货人姓名", trigger: "blur" },
+        ],
+        CorporateName: [
+          {
+            required: true,
+            message: "请填写疫苗/药品公司详细地址",
+            trigger: "blur",
+          },
+        ],
+        country: [
+          { required: true, message: "请输入发货地址", trigger: "blur" },
+        ],
+        CompanyAddress: [
+          { required: true, message: "请输入发货地址", trigger: "blur" },
+        ],
+        PostalCode: [
+          { required: true, message: "请填写发货地邮政编码", trigger: "blur" },
+        ],
+        time: [
+          { required: true, message: "请填写规定发货时间", trigger: "blur" },
+        ],
+        CorporateName2: [
+          {
+            required: true,
+            message: "请填写疫苗/药品公司详细地址",
+            trigger: "blur",
+          },
+        ],
+        country2: [
+          { required: true, message: "请输入收货地址", trigger: "blur" },
+        ],
+        CompanyAddress2: [
+          { required: true, message: "请输入收货地址", trigger: "blur" },
+        ],
+        time2: [{ required: true, message: "请选择日期时间", trigger: "blur" }],
+        phone: [
+          { required: true, message: "请填写收货人手机号码", trigger: "blur" },
+        ],
+        name: [
+          { required: true, message: "请填写收货人姓名", trigger: "blur" },
+        ],
+      },
+    };
   },
+  created() {
+    //   获取创建时间及两个下拉菜单的参数
+    this.getnormalData();
+  },
+  components: {
+    CargoDetails: CargoDetails,
+    AOTRecorder: AOTRecorder,
+  },
+  methods: {
+    //   获取创建时间及两个下拉菜单的参数
+    async getnormalData() {
+      const { data: res } = await this.$http.get("normalData");
+      if (res.meta.status !== 200)
+        return this.$message.error("获取基本数据失败");
+      this.createtime = res.data.createtime;
+      this.options = res.data.options;
+      console.log(res);
+    },
 
-  created() {},
+    // 添加订单
+    ADDtransport() {
+      this.$refs.addFormRef.validate(async (valid) => {
+        if (!valid) return;
+        const { data: res } = await this.$http.post(
+          "Addtransport",
+          this.addForm
+        );
 
-  methods: {},
+        if (res.meta.status !== 201) {
+          this.$message.error("添加订单失败！");
+        }
+        this.$message.success("添加订单成功！");
+      });
+      this.$router.push({ path: "/Transport" });
+    },
+    Recover() {
+      this.$refs.addFormRef.resetFields();
+    },
+  },
 };
 </script>
 <style lang='less' scoped>
-.RefreshBox {
-  position: absolute;
-  top: 37px;
-  left: 1130px;
-  width: 50px;
-  height: 20px;
-}
-.RefreshImg {
-  position: relative;
-  top: -8px;
-  left: -15px;
-  width: 13px;
-  height: 15px;
-}
-.RefreshTitle {
-  position: relative;
-  font-size: 10px;
-  top: -12px;
-  left: -14px;
-  width: 15px;
-  height: 15px;
-}
+@import "../css/CreateTransport.css";
 </style>
