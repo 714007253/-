@@ -13,7 +13,7 @@ body {
   margin: 0;
 }
 #app {
-  width: 1423px;
-  height: 2270px;
+  width: 100%;
+  height: 100%;
 }
 </style>

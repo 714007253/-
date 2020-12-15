@@ -1,0 +1,200 @@
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #a2d5f2 !important;
+}
+
+.Header {
+  display: none;
+}
+
+.Header2 {
+  display: none;
+}
+
+.Aside {
+  position: relative;
+  top: 10px;
+  height: 396px;
+  width: 200px !important;
+}
+
+.Main {
+  position: relative;
+  top: 10px;
+  background-color: #f5f5f5;
+  height: 2240px;
+  width: 1223px;
+}
+
+.copyright {
+  color: #cccccc;
+  position: absolute;
+  left: 675px;
+  top: 2270px;
+}
+
+.el-header {
+  padding: 0;
+}
+
+.HeaderBox {
+  position: relative;
+  left: -20px;
+  height: 70px;
+  width: 1423px;
+  background-image: linear-gradient(-225deg,
+      #22e1ff 0%,
+      #1d8fe1 48%,
+      #625eb1 100%);
+}
+
+.HeaderBox2 {
+  position: relative;
+  left: -20px;
+  height: 70px;
+  width: 1423px;
+  background-image: linear-gradient(to right,
+      #b8cbb8 0%,
+      #b8cbb8 0%,
+      #b465da 0%,
+      #cf6cc9 33%,
+      #ee609c 66%,
+      #ee609c 100%);
+}
+
+.HeaderImage {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 15px;
+  left: 2px;
+}
+
+.HeaderTitle {
+  position: relative;
+  top: 2px;
+  left: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.HeaderFlex {
+  color: #ffffff !important;
+  display: flex;
+}
+
+.HeaderA {
+  margin: 20px;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  position: relative;
+  top: -38px;
+  left: 215px;
+}
+
+.HeaderAdmin {
+  font-weight: 600;
+  color: #ffffff !important;
+  font-size: 14px;
+  position: relative;
+  top: -76px;
+  left: 1181px;
+}
+
+.Quit {
+  position: relative;
+  top: -198px;
+  left: 1358px;
+  width: 60px;
+  height: 70px;
+}
+
+.ChangeColor {
+  position: relative;
+  top: -126px;
+  left: 1297px;
+  width: 60px;
+  height: 70px;
+}
+
+.ChangeImg {
+  position: relative;
+  top: 23px;
+  left: 13px;
+  width: 30px;
+  height: 30px;
+}
+
+.QuitImg {
+  position: relative;
+  top: 27px;
+  left: 13px;
+  width: 25px;
+  height: 25px;
+}
+
+.AsideBox1 {
+  border: 1px solid #f2f2f2;
+  font-weight: 700;
+  background-color: #f2f2f2;
+  color: #999999;
+  height: 50px;
+}
+
+.AsideBox1_1 {
+  font-size: 14px;
+  position: relative;
+  top: 15px;
+  left: 20px;
+}
+
+.AsideBox2 {
+  font-size: 12px;
+  border: 1px solid #ffffff;
+  font-weight: 700;
+
+  height: 50px;
+}
+
+.AsideBox2_1 {
+  position: relative;
+  top: 15px;
+  left: 53px;
+}
+
+.AsidePicture {
+  position: relative;
+  top: 2px;
+  left: -5px;
+  width: 14px;
+  height: 14px;
+}
+
+.Headershow1 {
+  display: none;
+}
+
+.Headershow2 {
+  display: none;
+}
+
+.Headershow3 {
+  display: none;
+}
+
+.Headershow4 {
+  display: none;
+}
+
+.Headershow5 {
+  display: none;
+}
+
+.Headershow6 {
+  display: none;
+}

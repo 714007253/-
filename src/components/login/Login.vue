@@ -428,6 +428,7 @@ a {
   height: 100px;
 }
 .copyright {
+  width: 300px;
   color: #cccccc;
   position: relative;
   left: 600px;

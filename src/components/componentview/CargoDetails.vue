@@ -28,8 +28,15 @@
       </el-table-column>
 
       <!-- 操作区 -->
-      <el-table-column label="操作" width="120">
+      <el-table-column label="操作" width="220">
         <template slot-scope="scope">
+          <!-- 编辑按钮 -->
+          <el-button
+            size="mini"
+            @click="changeCargoDetailsDialog(scope.row.id)"
+          >
+            编辑
+          </el-button>
           <!-- 删除按钮 -->
           <el-button
             size="mini"
@@ -73,6 +80,7 @@
           <el-input v-model="CargoDetailsForms.ThrowWeight"></el-input>
         </el-form-item>
       </el-form>
+
       <!-- 底部区域 -->
       <span slot="footer">
         <el-button @click="CargoDetailsVisible = false">取 消</el-button>
@@ -87,6 +95,7 @@ export default {
   data() {
     return {
       CargoDetailsVisible: false,
+      ChangeCargoDetailsVisible: false,
       // 货物数据定义
       CargorList: [
         {
@@ -169,6 +178,27 @@ export default {
       this.$message.success("删除货物数据成功！");
       console.log(res);
       this.getCargoDetailsList();
+    },
+    // 编辑用户通过id传递数据
+    async showEditDialog(id) {
+      const { data: res } = await this.$http.get("users/" + id);
+      if (res.meta.status !== 200) {
+        return this.$message.error("查询用户信息失败！");
+      }
+      this.editForm = res.data;
+    },
+    async changeUser() {
+      // 这里暂时只推送email和mobile两个数据组
+      const { data: res } = await this.$http.post("users/" + this.editForm.id, {
+        email: this.editForm.email,
+        mobile: this.editForm.mobile,
+      });
+      if (res.meta.status !== 200) {
+        return this.$message.error("更新用户信息失败");
+      }
+      //  返回上级 刷新列表 提示修改成功
+      this.getUserList();
+      this.$message.success("更新用户信息成功");
     },
   },
 };

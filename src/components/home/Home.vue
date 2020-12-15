@@ -374,6 +374,7 @@ export default {
     // 头部方法start
     // 点击切换侧边栏
     As1() {
+      this.$router.push("/Welcome");
       this.HeaderVisible1 = false;
       this.HeaderVisible2 = true;
       this.HeaderVisible3 = true;
@@ -382,6 +383,7 @@ export default {
       this.HeaderVisible6 = true;
     },
     As2() {
+      this.$router.push("/Transport");
       this.HeaderVisible1 = true;
       this.HeaderVisible2 = false;
       this.HeaderVisible3 = true;
@@ -390,6 +392,7 @@ export default {
       this.HeaderVisible6 = true;
     },
     As3() {
+      this.$router.push("/record");
       this.HeaderVisible1 = true;
       this.HeaderVisible2 = true;
       this.HeaderVisible3 = false;
@@ -398,6 +401,7 @@ export default {
       this.HeaderVisible6 = true;
     },
     As4() {
+      this.$router.push("/enclosure");
       this.HeaderVisible1 = true;
       this.HeaderVisible2 = true;
       this.HeaderVisible3 = true;
@@ -406,6 +410,7 @@ export default {
       this.HeaderVisible6 = true;
     },
     As5() {
+      this.$router.push("/user");
       this.HeaderVisible1 = true;
       this.HeaderVisible2 = true;
       this.HeaderVisible3 = true;
@@ -414,6 +419,7 @@ export default {
       this.HeaderVisible6 = true;
     },
     As6() {
+      this.$router.push("/firmware");
       this.HeaderVisible1 = true;
       this.HeaderVisible2 = true;
       this.HeaderVisible3 = true;
@@ -449,7 +455,7 @@ export default {
     },
     // 跳转路由
     toWelcome() {
-      this.$router.push("/home");
+      this.$router.push("/Welcome");
     },
     toTransport() {
       this.$router.push("/Transport");
@@ -483,186 +489,7 @@ export default {
 </script>
 <style lang='less' scoped>
 // 主体样式start
+@import "../css/home/home.css";
 
-a {
-  text-decoration: none;
-}
-a:hover {
-  color: #a2d5f2 !important;
-}
-.Header {
-  display: none;
-}
-.Header2 {
-  display: none;
-}
-.Aside {
-  position: relative;
-  top: 10px;
-  height: 396px;
-  width: 200px !important;
-}
-.Main {
-  position: relative;
-  top: 10px;
-  background-color: #f5f5f5;
-  height: 2230px;
-  width: 1223px;
-}
-
-.copyright {
-  color: #cccccc;
-  position: absolute;
-  left: 675px;
-  top: 2270px;
-}
-// 主体样式end
-// 头部样式start
-.el-header {
-  padding: 0;
-}
-.HeaderBox {
-  height: 70px;
-  width: 1423px;
-  background-image: linear-gradient(
-    -225deg,
-    #22e1ff 0%,
-    #1d8fe1 48%,
-    #625eb1 100%
-  );
-}
-.HeaderBox2 {
-  height: 70px;
-  width: 1423px;
-  background-image: linear-gradient(
-    to right,
-    #b8cbb8 0%,
-    #b8cbb8 0%,
-    #b465da 0%,
-    #cf6cc9 33%,
-    #ee609c 66%,
-    #ee609c 100%
-  );
-}
-
-.HeaderImage {
-  width: 40px;
-  height: 40px;
-  position: relative;
-  top: 15px;
-  left: 2px;
-}
-.HeaderTitle {
-  position: relative;
-  top: 2px;
-  left: 12px;
-  font-weight: 700;
-  color: #ffffff;
-  font-size: 20px;
-}
-.HeaderFlex {
-  color: #ffffff !important;
-  display: flex;
-}
-.HeaderA {
-  margin: 20px;
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  position: relative;
-  top: -38px;
-  left: 215px;
-}
-.HeaderAdmin {
-  font-weight: 600;
-  color: #ffffff;
-  font-size: 14px;
-  position: relative;
-  top: -76px;
-  left: 1181px;
-}
-.Quit {
-  position: relative;
-  top: -198px;
-  left: 1358px;
-  width: 60px;
-  height: 70px;
-}
-.ChangeColor {
-  position: relative;
-  top: -126px;
-  left: 1297px;
-  width: 60px;
-  height: 70px;
-}
-.ChangeImg {
-  position: relative;
-  top: 23px;
-  left: 13px;
-  width: 30px;
-  height: 30px;
-}
-.QuitImg {
-  position: relative;
-  top: 27px;
-  left: 13px;
-  width: 25px;
-  height: 25px;
-}
-// 头部样式end
-// 侧边栏样式start
-.AsideBox1 {
-  border: 1px solid #f2f2f2;
-  font-weight: 700;
-  background-color: #f2f2f2;
-  color: #999999;
-  height: 50px;
-}
-.AsideBox1_1 {
-  font-size: 14px;
-  position: relative;
-  top: 15px;
-  left: 20px;
-}
-.AsideBox2 {
-  font-size: 12px;
-  border: 1px solid #ffffff;
-  font-weight: 700;
-
-  height: 50px;
-}
-.AsideBox2_1 {
-  position: relative;
-  top: 15px;
-  left: 53px;
-}
-.AsidePicture {
-  position: relative;
-  top: 2px;
-  left: -5px;
-  width: 14px;
-  height: 14px;
-}
-
-// 侧边栏样式end
-// 显示样式start
-.Headershow1 {
-  display: none;
-}
-.Headershow2 {
-  display: none;
-}
-.Headershow3 {
-  display: none;
-}
-.Headershow4 {
-  display: none;
-}
-.Headershow5 {
-  display: none;
-}
-.Headershow6 {
-  display: none;
-}
 // 显示样式end
 </style>

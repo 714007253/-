@@ -55,106 +55,41 @@
           >
           <span class="RadioTitle">查看形式:</span>
           <el-radio-group class="radio" v-model="radio1">
-            <el-radio-button @click="ChangeList" label="列表"></el-radio-button>
-            <el-radio-button @click="ChangeMap" label="地图"></el-radio-button>
+            <el-radio-button
+              @click.native="ChangeList"
+              label="列表"
+            ></el-radio-button>
+            <el-radio-button
+              @click.native="ChangeMap"
+              label="地图"
+            ></el-radio-button>
           </el-radio-group>
         </div>
       </div>
     </el-card>
 
-    <!-- 具体表单 -->
     <el-card class="box-card2">
-      <!-- 标题栏 -->
-      <div slot="header" class="clearfix">
-        <span><strong>数据列表</strong> </span>
-        <!-- 表格 -->
+      <!-- 列表显示 -->
+      <div :class="{ BoxlistShow: BoxlistShowVisable }">
+        <TransportList></TransportList>
       </div>
-      <!-- 表单区域 -->
-      <el-table :data="transportslist" stripe style="width: 100%" border>
-        <!-- 数据表单 -->
-        <el-table-column type="selection" width="55"> </el-table-column>
-
-        <el-table-column prop="TransportOrder" label="运输单号" width="160">
-        </el-table-column>
-
-        <el-table-column prop="ShippingAddress" label="发货地址" width="100">
-        </el-table-column>
-
-        <el-table-column prop="CollectionTime" label="揽收时间" width="110">
-        </el-table-column>
-
-        <el-table-column prop="Destination" label="送达目的地" width="100">
-        </el-table-column>
-
-        <el-table-column
-          prop="AgreedDeliveryTime"
-          label="约定送达时间"
-          width="110"
-        >
-        </el-table-column>
-
-        <el-table-column prop="State" label="状态" width="110">
-        </el-table-column>
-
-        <el-table-column
-          prop="ActualDeliveryTime"
-          label="实际送达时间"
-          width="110"
-        >
-        </el-table-column>
-
-        <el-table-column
-          prop="SavedTime"
-          label="已保存时间/保存有效期(小时)"
-          width="220"
-        >
-        </el-table-column>
-
-        <!-- 操作区 -->
-        <el-table-column fixed="right" width="210" label="操作区">
-          <template slot-scope="scope">
-            <!-- 查看按钮 -->
-            <el-button
-              size="mini"
-              @click="showEditDialog(scope.row.id)"
-              type="primary"
-            >
-              查看
-            </el-button>
-            <!-- 编辑按钮 -->
-            <el-button size="mini" @click="changeEditDialog(scope.row.id)">
-              编辑
-            </el-button>
-            <!-- 删除按钮 -->
-            <el-button
-              size="mini"
-              type="danger"
-              @click="removeUserById(scope.row.id)"
-              >删除
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-
-      <!-- 分页区域 -->
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="queryInfo.pagenum"
-        :page-sizes="[1, 2, 5, 10]"
-        :page-size="queryInfo.pagesize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      >
-      </el-pagination>
+      <!-- 地图显示 -->
+      <div :class="{ BoxmapShow: BoxmapShowVisable }">
+        <TransportMap></TransportMap>
+      </div>
     </el-card>
   </div>
 </template>
 
 <script>
+import TransportList from "./TransportList.vue";
+import TransportMap from "./TransportMap.vue";
 export default {
   data() {
     return {
+      // 切换地图和列表组件
+      BoxlistShowVisable: false,
+      BoxmapShowVisable: true,
       // 获取列表的参数对象
       queryInfo: {
         // 关键字筛选
@@ -169,20 +104,11 @@ export default {
       total: 0,
       // 显示形式单选定义
       radio1: "列表",
-      // 运输管理表单
-      transportslist: [
-        {
-          TransportOrder: "",
-          ShippingAddress: "",
-          CollectionTime: "",
-          Destination: "",
-          AgreedDeliveryTime: "",
-          State: "",
-          ActualDeliveryTime: "",
-          SavedTime: "",
-        },
-      ],
     };
+  },
+  components: {
+    TransportList: TransportList,
+    TransportMap: TransportMap,
   },
   created() {
     this.getTransportList();
@@ -203,123 +129,18 @@ export default {
     toCreateTransport() {
       this.$router.push("/CreateTransport");
     },
-    // 查看订单
-    showEditDialog() {},
-    // 编辑订单
-    changeEditDialog() {},
-    // 删除订单
-    async removeUserById(id) {
-      // 弹框询问用户是否删除数据
-      const confirmResult = await this.$confirm(
-        "此操作将永久删除该订单, 是否继续?",
-        "提示",
-        {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
-        }
-      ).catch((err) => err);
-
-      // 如果用户确认删除，则返回值为字符串 confirm
-      // 如果用户取消了删除，则返回值为字符串 cancel
-      if (confirmResult !== "confirm") {
-        return this.$message.info("已取消删除");
-      }
-
-      const { data: res } = await this.$http.post("Transport/" + id);
-
-      if (res.meta.status !== 200) {
-        return this.$message.error("删除订单失败！");
-      }
-
-      this.$message.success("删除订单成功！");
-      this.getTransportList();
-    },
-
-    // 翻页函数
-    handleSizeChange(newSize) {
-      this.queryInfo.pagesize = newSize;
-      this.getTransportList();
-    },
-    handleCurrentChange(newPage) {
-      console.log(newPage);
-      this.queryInfo.pagenum = newPage;
-      this.getTransportList();
-    },
     // 改变查看形式
-    ChangeList() {},
-    ChangeMap() {},
+    ChangeList() {
+      this.BoxlistShowVisable = false;
+      this.BoxmapShowVisable = true;
+    },
+    ChangeMap() {
+      this.BoxlistShowVisable = true;
+      this.BoxmapShowVisable = false;
+    },
   },
 };
 </script>
 <style lang='less' scoped>
-.RefreshBox {
-  position: absolute;
-  top: 37px;
-  left: 1130px;
-  width: 50px;
-  height: 20px;
-}
-.RefreshImg {
-  position: relative;
-  top: -8px;
-  left: -15px;
-  width: 13px;
-  height: 15px;
-}
-.RefreshTitle {
-  position: relative;
-  font-size: 10px;
-  top: -12px;
-  left: -14px;
-  width: 15px;
-  height: 15px;
-}
-.box-card1 {
-  position: relative;
-  top: 20px;
-  height: 105px;
-}
-.box-card2 {
-  position: relative;
-  top: 45px;
-  height: 1930px;
-}
-.clearfix {
-  color: #999999;
-  height: 10px;
-}
-.input {
-  position: relative;
-  top: -10px;
-}
-.select {
-  position: relative;
-  top: -10px;
-  left: 30px;
-}
-.search {
-  position: relative;
-  top: -10px;
-  left: 55px;
-}
-
-.add {
-  position: relative;
-  top: -73px;
-  left: 710px;
-  width: 110px;
-  height: 40px;
-}
-.radio {
-  position: relative;
-  top: -73px;
-  left: 834px;
-}
-.RadioTitle {
-  position: relative;
-  top: -71px;
-  left: 819px;
-  font-size: 16px;
-}
+@import "../css/transport/Transport.css";
 </style>

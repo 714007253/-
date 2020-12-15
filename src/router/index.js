@@ -15,8 +15,12 @@ import Send from '../components/SMS/send.vue'
 import User from '../components/user/user.vue'
 // 创建路由
 import CreateTransport from '../components/transport/CreateTransport.vue'
-
-
+// 查看编辑路由
+import CheckTransport from '../components/transport/CheckTransport.vue'
+import ChangeTransport from '../components/transport/ChangeTransport.vue'
+import CheckRecord from '../components/record/CheckRecord.vue'
+import CreateRecord from '../components/record/CreateRecord.vue'
+import ChangeRecord from '../components/record/ChangeRecord.vue'
 
 
 Vue.use(Router)
@@ -71,6 +75,23 @@ const router = new Router({
         , {
           path: '/CreateTransport',
           component: CreateTransport
+        }
+        // 查看编辑表单
+        , {
+          path: '/CheckTransport',
+          component: CheckTransport
+        }, {
+          path: '/ChangeTransport',
+          component: ChangeTransport
+        }, {
+          path: '/CheckRecord',
+          component: CheckRecord
+        }, {
+          path: '/CreateRecord',
+          component: CreateRecord
+        }, {
+          path: '/ChangeRecord',
+          component: ChangeRecord
         }
       ]
     }

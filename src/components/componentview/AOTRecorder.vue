@@ -21,6 +21,10 @@
       <!-- 操作区 -->
       <el-table-column label="操作" width="170">
         <template slot-scope="scope">
+          <!-- 编辑按钮 -->
+          <el-button size="mini" @click="changeAOTRecorderDialog(scope.row.id)">
+            编辑
+          </el-button>
           <!-- 删除按钮 -->
           <el-button
             size="mini"

@@ -1,8 +1,8 @@
-<!-- 新增订单 -->
+<!-- 运输管理-编辑订单 -->
 <template>
   <div>
+    <!-- 导航 -->
     <el-card>
-      <!-- 导航 -->
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/Welcome' }"
           ><strong>首页</strong>
@@ -10,25 +10,22 @@
         <el-breadcrumb-item :to="{ path: '/Transport' }"
           ><strong>运输管理</strong>
         </el-breadcrumb-item>
-        <el-breadcrumb-item><strong>创建订单</strong> </el-breadcrumb-item>
+        <el-breadcrumb-item><strong>编辑订单</strong> </el-breadcrumb-item>
       </el-breadcrumb>
     </el-card>
     <!-- 表头 -->
-    <el-card class="box-card">
-      <span><strong>新增运输单</strong></span>
-    </el-card>
-    <el-card class="box-card2">
-      <!-- 表单一 -->
+    <el-card class="ChangeBox">
+      <span><strong>编辑运输单</strong></span>
       <el-form
         label-position="top"
-        :model="addForm"
-        :rules="addFormRules"
-        ref="addFormRef"
+        :model="ChangeForm"
+        :rules="ChangeFormRules"
+        ref="ChangeFormRef"
         label-width="70px"
       >
         <!-- 基础信息 -->
-        <div class="BasicInformation">
-          <span class="BasicIfTtile">基础信息</span>
+        <div class="CHBasicInformation">
+          <span class="CHBasicIfTtile">基础信息</span>
           <span class="BasicIfpoint">*</span>
           <span class="BasicIfTtile2">为必填项</span>
         </div>
@@ -39,7 +36,7 @@
             <el-form-item label="货物名称" prop="NameOfGoods">
               <el-input
                 placeholder="请输入货件名称"
-                v-model="addForm.NameOfGoods"
+                v-model="ChangeForm.NameOfGoods"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -48,7 +45,7 @@
             <el-form-item label="快递单号" prop="CourierNumber">
               <el-input
                 placeholder="请填写运输单号"
-                v-model="addForm.CourierNumber"
+                v-model="ChangeForm.CourierNumber"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -57,7 +54,7 @@
             <el-form-item label="托运人" prop="shipper">
               <el-input
                 placeholder="请填写托运人姓名"
-                v-model="addForm.shipper"
+                v-model="ChangeForm.shipper"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -68,7 +65,7 @@
           <el-col :span="8">
             <el-form-item label="运输ID" prop="IDTransportation">
               <el-input
-                v-model="addForm.IDTransportation"
+                v-model="ChangeForm.IDTransportation"
                 placeholder="请输入货件名称"
               >
               </el-input>
@@ -77,7 +74,7 @@
           <!-- 运输方式 -->
           <el-col :span="8">
             <el-form-item label="运输方式" prop="TypeOfShipping">
-              <el-select v-model="addForm.TypeOfShipping">
+              <el-select v-model="ChangeForm.TypeOfShipping">
                 <el-option label="航空" value="1"></el-option>
                 <el-option label="铁路" value="2"></el-option>
                 <el-option label="水路" value="3"></el-option>
@@ -88,7 +85,7 @@
           <!-- 运输状态-->
           <el-col :span="8">
             <el-form-item label="运输状态" prop="TransportStatus">
-              <el-select v-model="addForm.TransportStatus">
+              <el-select v-model="ChangeForm.TransportStatus">
                 <el-option label="未开始" value="1"></el-option>
                 <el-option label="运送中" value="2"></el-option>
                 <el-option label="已完成" value="3"></el-option>
@@ -102,7 +99,7 @@
           <el-col :span="8">
             <el-form-item label="收货人" prop="consignee">
               <el-input
-                v-model="addForm.consignee"
+                v-model="ChangeForm.consignee"
                 placeholder="请填写收货人姓名"
               >
               </el-input>
@@ -116,7 +113,7 @@
             <el-input
               type="textarea"
               placeholder="请输入内容"
-              v-model="addForm.text"
+              v-model="ChangeForm.text"
               maxlength="200"
               show-word-limit
               rows="7"
@@ -132,11 +129,9 @@
 
         <!-- 表单二 -->
         <!-- 发货信息 -->
-        <div class="ShippingInf">
-          <img src="../images/qibiao.svg" alt="" />
-          <span class="ShippingInfTime">{{ createtime }}</span>
-          <span class="ShippingInfTitle">发货信息</span>
-          <el-checkbox class="ShippingInfCheck" v-model="addForm.inline"
+        <div class="CHShippingInf">
+          <span class="CHShippingInfTitle">发货信息</span>
+          <el-checkbox class="CHShippingInfCheck" v-model="ChangeForm.inline"
             >数据联网</el-checkbox
           >
         </div>
@@ -147,7 +142,7 @@
             <el-form-item label="公司名称" prop="CorporateName">
               <el-input
                 placeholder="请填写疫苗/药品公司详细地址"
-                v-model="addForm.CorporateName"
+                v-model="ChangeForm.CorporateName"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -155,7 +150,7 @@
           <el-col :span="8">
             <el-form-item label="国家/省份/市区" prop="country">
               <el-cascader
-                v-model="addForm.country"
+                v-model="ChangeForm.country"
                 :options="options"
               ></el-cascader>
             </el-form-item>
@@ -165,7 +160,7 @@
             <el-form-item label="公司详细地址" prop="CompanyAddress">
               <el-input
                 placeholder="请填写发货方公司详细地址"
-                v-model="addForm.CompanyAddress"
+                v-model="ChangeForm.CompanyAddress"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -177,7 +172,7 @@
             <el-form-item label="邮政编码" prop="PostalCode">
               <el-input
                 placeholder="请填写发货地邮政编码"
-                v-model="addForm.PostalCode"
+                v-model="ChangeForm.PostalCode"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -188,7 +183,7 @@
                 <el-date-picker
                   type="date"
                   placeholder="请选择日期时间"
-                  v-model="addForm.time"
+                  v-model="ChangeForm.time"
                   style="width: 100%"
                 >
                 </el-date-picker>
@@ -200,7 +195,7 @@
         <!-- 收货信息 -->
         <div class="ShippingInf2">
           <span class="ShippingInfTitle2">收货信息</span>
-          <el-checkbox class="ShippingInfCheck2" v-model="addForm.inline2"
+          <el-checkbox class="ShippingInfCheck2" v-model="ChangeForm.inline2"
             >数据联网</el-checkbox
           >
         </div>
@@ -211,7 +206,7 @@
             <el-form-item label="公司名称" prop="CorporateName2">
               <el-input
                 placeholder="请填写疫苗/药品公司详细地址"
-                v-model="addForm.CorporateName2"
+                v-model="ChangeForm.CorporateName2"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -219,7 +214,7 @@
           <el-col :span="8">
             <el-form-item label="国家/省份/市/区" prop="country2">
               <el-cascader
-                v-model="addForm.country2"
+                v-model="ChangeForm.country2"
                 :options="options"
               ></el-cascader>
             </el-form-item>
@@ -229,7 +224,7 @@
             <el-form-item label="公司详细地址" prop="CompanyAddress2">
               <el-input
                 placeholder="请填写收货方公司详细地址"
-                v-model="addForm.CompanyAddress2"
+                v-model="ChangeForm.CompanyAddress2"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -241,7 +236,7 @@
             <el-form-item label="邮政编码" prop="PostalCode2">
               <el-input
                 placeholder="请填写收货地邮政编码"
-                v-model="addForm.PostalCode2"
+                v-model="ChangeForm.PostalCode2"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -252,7 +247,7 @@
                 <el-date-picker
                   type="date"
                   placeholder="请选择日期时间"
-                  v-model="addForm.time2"
+                  v-model="ChangeForm.time2"
                   style="width: 100%"
                 >
                 </el-date-picker>
@@ -264,7 +259,7 @@
             <el-form-item label="手机号码" prop="phone">
               <el-input
                 placeholder="请填写收货人手机号码"
-                v-model="addForm.phone"
+                v-model="ChangeForm.phone"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -276,7 +271,7 @@
             <el-form-item label="收货人姓名" prop="name">
               <el-input
                 placeholder="请填写收货人姓名"
-                v-model="addForm.name"
+                v-model="ChangeForm.name"
               ></el-input>
             </el-form-item>
           </el-col>
@@ -298,8 +293,7 @@ import AOTRecorder from "../componentview/AOTRecorder.vue";
 export default {
   data() {
     return {
-      // 表单一数据定义
-      addForm: {
+      ChangeForm: {
         // 表一
         NameOfGoods: "",
         CourierNumber: "",
@@ -326,13 +320,7 @@ export default {
         phone: "",
         name: "",
       },
-      //   获取创建时间
-      createtime: "",
-      //   下拉菜单一
-      value: [],
-      options: [],
-      // 表单一验证规则
-      addFormRules: {
+      ChangeFormRules: {
         CourierNumber: [
           { required: true, message: "请输入快递单号", trigger: "blur" },
         ],
@@ -396,47 +384,29 @@ export default {
       },
     };
   },
-  created() {
-    //   获取创建时间及两个下拉菜单的参数
-    this.getnormalData();
-  },
+
   components: {
     CargoDetails: CargoDetails,
     AOTRecorder: AOTRecorder,
   },
-  methods: {
-    //   获取创建时间及两个下拉菜单的参数
-    async getnormalData() {
-      const { data: res } = await this.$http.get("normalData");
-      if (res.meta.status !== 200)
-        return this.$message.error("获取基本数据失败");
-      this.createtime = res.data.createtime;
-      this.options = res.data.options;
-      console.log(res);
-    },
 
-    // 添加订单
-    ADDtransport() {
-      this.$refs.addFormRef.validate(async (valid) => {
-        if (!valid) return;
-        const { data: res } = await this.$http.post(
-          "Addtransport",
-          this.addForm
-        );
-
-        if (res.meta.status !== 201) {
-          this.$message.error("添加订单失败！");
-        }
-        this.$message.success("添加订单成功！");
-      });
-      this.$router.push({ path: "/Transport" });
-    },
-    Recover() {
-      this.$refs.addFormRef.resetFields();
-    },
-  },
+  methods: {},
 };
 </script>
 <style lang='less' scoped>
-@import "../css/transport/CreateTransport.css";
+.ChangeBox {
+  position: relative;
+  top: 15px;
+  height: 2090px;
+}
+.CHBasicInformation {
+  position: relative;
+  top: 15px;
+  margin-bottom: 25px;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+}
+.CHBasicIfTtile {
+  color: black;
+}
 </style>

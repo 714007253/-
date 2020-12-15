@@ -94,7 +94,7 @@
       >
     </el-card>
     <el-card class="Data4">
-      <span class="Data2_2">报警记数据列表</span>
+      <span class="Data2_2">报警数据列表</span>
       <span class="Data3_1"
         ><a href="javascript:;" style="color: #377ccf; text-decoration: none"
           >查看全部</a
