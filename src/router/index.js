@@ -21,6 +21,9 @@ import ChangeTransport from '../components/transport/ChangeTransport.vue'
 import CheckRecord from '../components/record/CheckRecord.vue'
 import CreateRecord from '../components/record/CreateRecord.vue'
 import ChangeRecord from '../components/record/ChangeRecord.vue'
+import CheckEnclosure from '../components/enclosure/CheckEnclosure.vue'
+import CreateEnclosure from '../components/enclosure/CreateEnclosure.vue'
+import CreateUser from '../components/user/CreateUser.vue'
 
 
 Vue.use(Router)
@@ -92,6 +95,15 @@ const router = new Router({
         }, {
           path: '/ChangeRecord',
           component: ChangeRecord
+        }, {
+          path: '/CheckEnclosure',
+          component: CheckEnclosure
+        }, {
+          path: '/CreateEnclosure',
+          component: CreateEnclosure
+        }, {
+          path: '/CreateUser',
+          component: CreateUser
         }
       ]
     }

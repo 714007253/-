@@ -2,13 +2,13 @@
 <template>
   <div>
     <!-- 导航 -->
-    <el-card>
+    <el-card class="box-0">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/Welcome' }"
           ><strong>首页</strong>
         </el-breadcrumb-item>
         <el-breadcrumb-item><strong>电子围栏</strong> </el-breadcrumb-item>
-        <el-button class="RefreshBox" @click="getTransportList"
+        <el-button class="RefreshBox" @click="getEnclosureList"
           ><img src="../images/刷新.svg" class="RefreshImg" />
           <span class="RefreshTitle">刷新 </span>
         </el-button>
@@ -36,18 +36,20 @@
             <el-button type="primary" @click="getEnclosureList">查询</el-button>
           </el-form-item>
           <el-form-item class="search">
-            <el-button type="primary" @click="AddTransportList"
+            <el-button type="primary" @click="AddEnclosureList"
               >新增围栏</el-button
             >
           </el-form-item>
         </el-form>
       </div>
     </el-card>
-    <el-card class="box-card2"> </el-card>
+    <!-- 数据列表 -->
+    <el-card class="box-card2"> <EnclosureList></EnclosureList> </el-card>
   </div>
 </template>
 
 <script>
+import EnclosureList from "./EnclosureList.vue";
 export default {
   data() {
     return {
@@ -63,11 +65,26 @@ export default {
     };
   },
 
-  components: {},
+  components: {
+    EnclosureList: EnclosureList,
+  },
   created() {
     this.getEnclosureList();
   },
-  methods: {},
+  methods: {
+    async getEnclosureList() {
+      const { data: res } = await this.$http.get("Enclosure", {
+        params: this.queryInfo,
+      });
+      if (res.meta.status !== 200)
+        return this.$message.error("获取电子围栏表单失败");
+      this.Enclosurelist = res.data.Enclosure;
+      this.total = res.data.total;
+    },
+    AddEnclosureList() {
+      this.$router.push("/CreateEnclosure");
+    },
+  },
 };
 </script>
 <style lang='less' scoped>
@@ -75,10 +92,6 @@ export default {
   width: 330px;
 }
 .InputSearch {
-  width: 260px;
-}
-.box-card2 {
-  position: relative;
-  top: 10px;
+  width: 260px !important;
 }
 </style>

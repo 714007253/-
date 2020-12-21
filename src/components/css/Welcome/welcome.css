@@ -1,0 +1,206 @@
+/* 导航样式 */
+.Webox-0 {
+    top: 5px;
+    width: 1211px;
+    position: relative;
+    left: 15px;
+    height: 60px;
+}
+
+.WeRefreshBox {
+    position: relative;
+    top: 0px;
+    left: 1050px;
+    width: 50px;
+    height: 20px;
+}
+
+.box-0 {
+    top: 5px;
+    width: 1220px;
+    position: relative;
+    left: 15px;
+    height: 60px;
+}
+
+.RefreshImg {
+    position: relative;
+    top: -8px;
+    left: -15px;
+    width: 13px;
+    height: 15px;
+}
+
+.RefreshTitle {
+    position: relative;
+    font-size: 10px;
+    top: -12px;
+    left: -14px;
+    width: 15px;
+    height: 15px;
+}
+
+/* 四个数显卡片 */
+.DataBox {
+    margin: 17px;
+    float: left;
+    height: 120px;
+    width: 275px;
+    color: #999999;
+    font-size: 14px;
+}
+
+.DataBox_1 {
+    position: relative;
+    top: 60px;
+    left: 35px;
+}
+
+.Point1 {
+    position: relative;
+    top: -10px;
+    left: -30px;
+    color: #58a3f7;
+}
+
+.Point2 {
+    position: relative;
+    top: -10px;
+    left: -30px;
+    color: #fec03d;
+}
+
+.Point3 {
+    position: relative;
+    top: -10px;
+    left: -30px;
+    color: #52c1f5;
+}
+
+.Point4 {
+    position: relative;
+    top: -10px;
+    left: -30px;
+    color: #4bced0;
+}
+
+.DataBox_2 {
+    position: relative;
+    left: 30px;
+    top: -42px;
+    font-size: 27px;
+    color: black;
+}
+
+.DataBox_3 {
+    position: relative;
+    left: 40px;
+    top: -43px;
+    font-size: 15px;
+    color: black;
+}
+
+.Datatitle {
+    position: relative;
+    left: -25px;
+    top: -10px;
+    font-size: 13px;
+    color: #999999;
+}
+
+.DataBox_4 {
+    position: relative;
+    left: 50px;
+    top: -41px;
+    font-size: 23px;
+    color: black;
+}
+
+/* 物流状态和报警统计 */
+.DataBox2 {
+    position: relative;
+    float: left;
+    margin: 17px;
+    width: 585px;
+    height: 405px;
+}
+.Data2Title {
+    position: relative;
+    left: 23px;
+    top: 23px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.DataBox2_1 {
+    position: relative;
+    left: -21px;
+    top: -21px;
+    border: 1px solid #f2f2f2;
+    width: 585px;
+    height: 60px;
+}
+
+
+.select {
+    position: relative !important;
+    top: 16px;
+    left: 302px !important;
+    height: 30px !important;
+    width: 161px !important;
+}
+
+#RecorderData {
+    position: relative;
+    left: -18px;
+    top: -13px;
+    width: 565px;
+    height: 315px;
+}
+
+#RecorderDangerData {
+    position: relative;
+    left: 14px;
+    top: 55px;
+    width: 570px;
+    height: 320px;
+}
+
+
+
+/* 报警记录仪与报警数据列表 */
+.DataBox3 {
+    margin: 19px;
+    width: 1206px;
+    height: 804px;
+}
+
+.DataBox4 {
+    position: relative;
+    left: -20px;
+    top: -20px;
+    padding: 19px;
+    height: 18px;
+    width: 1206px;
+    border: 1px solid #f2f2f2;
+}
+
+.DataBox3Title {
+    font-size: 15px;
+    color: black;
+    font-weight: 700;
+
+}
+
+.DataBox3Title2 {
+    font-size: 15px;
+    position: relative;
+    left: 1030px;
+    top: 3px;
+}
+
+.DataBox3Title3 {
+    font-size: 15px;
+    position: relative;
+    left: 1005px;
+    top: 5px;
+}

@@ -1,0 +1,126 @@
+.CardFlex {
+    display: flex;
+}
+
+.CardBox {
+    width: 370px;
+    height: 670px;
+    margin: 10px;
+}
+
+.Boximg {
+    position: relative;
+    left: 290px;
+    top: -15px;
+}
+
+.CardData1_1 {
+    position: relative;
+    top: -56px;
+    left: 3px;
+    width: 278px;
+    font-size: 15px;
+}
+
+.CardData1_1 span {
+    margin-left: 4px;
+}
+
+.CardMap {
+    position: relative;
+    left: -5px;
+    top: -17px;
+    width: 335px;
+    height: 160px;
+}
+
+.CardMap2 {
+    position: relative;
+    left: -5px;
+    top: -17px;
+    width: 335px;
+    height: 160px;
+}
+
+.CardMap3 {
+    position: relative;
+    left: -5px;
+    top: -17px;
+    width: 335px;
+    height: 160px;
+}
+
+.CardRow {
+    position: relative;
+    left: -20px;
+    line-height: 52px;
+    width: 370px;
+    height: 50px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.CardRow .CardTtile {
+    font-size: 14px;
+    position: relative;
+    left: 22px;
+}
+
+.Cardsmart {
+    position: relative;
+    left: 22px;
+    font-size: 11px;
+    color: #D7D7D7;
+}
+
+.CardData1_2 {
+    font-size: 14px;
+    position: relative;
+    left: 22px;
+}
+
+.CardData1_3 {
+    text-align: right;
+    left: -27px;
+    font-size: 14px;
+    top: -50px;
+    position: relative;
+}
+
+#amapDemo1 {
+    width: 335px;
+    height: 170px;
+}
+
+.amap-page-container1 {
+    position: relative;
+    left: -20px;
+    top: -23px;
+    width: 335px;
+    height: 160px;
+}
+
+#amapDemo2 {
+    width: 335px;
+    height: 170px;
+}
+
+.amap-page-container2 {
+    position: relative;
+    left: -20px;
+    top: -23px;
+    width: 335px;
+    height: 160px;
+}
+
+#amapDemo3 {
+    width: 335px;
+    height: 170px;
+}
+
+.amap-page-container3 {
+    position: relative;
+    left: -20px;
+    top: -23px;
+    width: 335px;
+    height: 160px;
+}

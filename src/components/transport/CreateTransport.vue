@@ -1,7 +1,7 @@
 <!-- 新增订单 -->
 <template>
   <div>
-    <el-card>
+    <el-card class="box-0">
       <!-- 导航 -->
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/Welcome' }"
@@ -14,7 +14,7 @@
       </el-breadcrumb>
     </el-card>
     <!-- 表头 -->
-    <el-card class="box-card">
+    <el-card class="box-card1c">
       <span><strong>新增运输单</strong></span>
     </el-card>
     <el-card class="box-card2">

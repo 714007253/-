@@ -1,0 +1,205 @@
+/* 基础样式 */
+a {
+    font-size: 12px;
+    color: #00c1de;
+    text-decoration: none;
+}
+
+/* 头部样式 */
+.header {
+    background-color: #f5f5ff;
+    font-size: 18px;
+    color: #787887;
+    width: 100%;
+    height: 50px;
+}
+
+.title {
+    position: relative;
+    top: 25px;
+}
+
+/* 主体样式 */
+.main {
+    background-image: linear-gradient(to right, #ebc0fd 0%, #d9ded8 100%);
+    width: 100%;
+    height: 700px;
+}
+
+.picture {
+    position: absolute;
+    top: 270px;
+    left: 200px;
+}
+
+.word1 {
+    color: #ffffff;
+    position: absolute;
+    font-size: 28px;
+    font-weight: 700;
+    left: 350px;
+    top: 300px;
+}
+
+.word2 {
+    color: #ffffff;
+    position: absolute;
+    font-size: 20px;
+    font-weight: 400;
+    left: 350px;
+    top: 350px;
+}
+
+.card1 {
+    position: absolute;
+    width: 410px;
+    height: 355px;
+    left: 850px;
+    top: 190px;
+}
+
+.LoginTitle {
+    color: #787887;
+    position: absolute;
+    left: 40px;
+    top: 48px;
+    font-size: 17px;
+}
+
+.LoginImage {
+    position: absolute;
+    left: 270px;
+    top: 50px;
+}
+
+.LoginTitle2 {
+    color: #0079fe;
+    position: absolute;
+    left: 280px;
+    top: 52px;
+    font-size: 12px;
+}
+
+.LoginClick {
+    position: absolute;
+    left: 345px;
+    top: 43px;
+    height: 35px;
+    width: 35px;
+}
+
+.PasswordForm {
+    position: relative;
+    left: 15px;
+    width: 345px;
+    top: 85px;
+}
+
+.PasswordButton {
+    position: relative;
+    width: 345px;
+    background-color: #00c1de;
+}
+
+.ToRegister {
+    position: absolute;
+    left: 35px;
+    top: 280px;
+}
+
+.ToForget {
+    position: absolute;
+    left: 330px;
+    top: 281px;
+}
+
+.RegisterTitle {
+    color: #787887;
+    position: absolute;
+    left: 40px;
+    top: 30px;
+    font-size: 17px;
+}
+
+.RegisterForm {
+    position: relative;
+    left: 15px;
+    width: 345px;
+    top: 48px;
+}
+
+.RegisterButton {
+    position: relative;
+    width: 345px;
+    background-color: #00c1de;
+}
+
+.ToPassword {
+    position: absolute;
+    left: 35px;
+    top: 310px;
+}
+
+.ForgetTitle {
+    color: #787887;
+    position: absolute;
+    left: 40px;
+    top: 50px;
+    font-size: 17px;
+}
+
+.ForgetForm {
+    position: relative;
+    left: 15px;
+    width: 345px;
+    top: 88px;
+}
+
+.ForgetButton {
+    position: relative;
+    width: 345px;
+    background-color: #00c1de;
+}
+
+.ToPassword {
+    position: absolute;
+    left: 35px;
+    top: 310px;
+}
+
+.FoInput {
+    width: 185px !important;
+}
+
+.SendMsg {
+    width: 160px;
+}
+
+/* 页脚样式 */
+.footer {
+    background-color: #f5f5ff;
+    font-size: 14px;
+    width: 100%;
+    height: 100px;
+}
+
+.LoginCopyright {
+    color: #cccccc;
+    position: absolute;
+    left: 650px;
+    top: 788px;
+}
+
+
+/* 显示样式 */
+.Passwordshow {
+    display: none;
+}
+
+.Registershow {
+    display: none;
+}
+
+.Forgetshow {
+    display: none;
+}

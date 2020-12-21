@@ -8,9 +8,8 @@
 
 
 .RefreshBox {
-  position: absolute;
-  top: 37px;
-  left: 1130px;
+  position: relative;
+  left: 990px;
   width: 50px;
   height: 20px;
 }
@@ -32,14 +31,26 @@
   height: 15px;
 }
 
-.box-card1 {
+.box-0 {
+  top: 5px;
+  width: 1220px;
   position: relative;
+  left: 15px;
+  height: 60px;
+}
+
+.box-card1 {
+  width: 1220px;
+  position: relative;
+  left: 15px;
   top: 20px;
   height: 125px;
 }
 
 .box-card2 {
+  width: 1220px;
   position: relative;
+  left: 15px;
   top: 45px !important;
   height: 1930px;
 }
@@ -70,7 +81,7 @@
   top: -10px;
 }
 
-.select {
+.Trselect {
   position: relative;
   top: -10px;
   left: 30px;

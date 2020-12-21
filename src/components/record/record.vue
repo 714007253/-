@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- 导航 -->
-    <el-card>
+    <el-card class="box-0">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/Welcome' }"
           ><strong>首页</strong>
@@ -30,7 +30,7 @@
       <!-- 搜索框 -->
       <div class="box-search">
         <el-form :inline="true" :model="queryInfo" class="demo-form-inline">
-          <el-form-item label="记录仪编号" class="input">
+          <el-form-item label="记录仪编号" class="Reinput">
             <el-input
               class="InputSearch"
               v-model="queryInfo.query"
@@ -40,14 +40,14 @@
               @keyup.enter.native="getRecordList"
             ></el-input>
           </el-form-item>
-          <el-form-item label="记录仪状态" class="select">
+          <el-form-item label="记录仪状态" class="Reselect">
             <el-select v-model="queryInfo.query2">
               <el-option label="全部" value="1"></el-option>
               <el-option label="在线" value="2"></el-option>
               <el-option label="离线" value="3"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="select" label="报警状态">
+          <el-form-item class="Reselect" label="报警状态">
             <el-select v-model="queryInfo.query5">
               <el-option label="全部" value="1"></el-option>
               <el-option label="正常" value="2"></el-option>
@@ -55,7 +55,7 @@
             </el-select>
           </el-form-item>
 
-          <el-form-item class="search">
+          <el-form-item class="Research">
             <el-button type="primary" @click="getRecordList">查询</el-button>
           </el-form-item>
         </el-form>
@@ -69,6 +69,7 @@
         <el-button class="AddButton" type="primary" @click="AddRecord"
           >添加</el-button
         >
+        <el-button class="AddButton" type="success">导出</el-button>
       </div>
       <RecordList></RecordList>
     </el-card>
@@ -233,71 +234,5 @@ export default {
 };
 </script>
 <style lang='less' scoped>
-.RefreshBox {
-  position: absolute;
-  top: 37px;
-  left: 1130px;
-  width: 50px;
-  height: 20px;
-}
-
-.RefreshImg {
-  position: relative;
-  top: -8px;
-  left: -15px;
-  width: 13px;
-  height: 15px;
-}
-
-.RefreshTitle {
-  position: relative;
-  font-size: 10px;
-  top: -12px;
-  left: -14px;
-  width: 15px;
-  height: 15px;
-}
-.box-card1 {
-  position: relative;
-  top: 20px;
-  height: 125px;
-  width: 100%;
-}
-
-.clearfix {
-  color: #999999;
-  margin-bottom: 10px;
-  height: 10px;
-}
-.input {
-  width: 345px;
-}
-.InputSearch {
-  width: 235px;
-}
-.search {
-  width: 10px;
-  position: relative;
-  left: 66px;
-}
-.HightClear {
-  position: relative;
-  left: 977px;
-}
-.select {
-  position: relative;
-  left: -27px;
-}
-.box-card2 {
-  position: relative;
-  top: 45px;
-  height: 1930px;
-}
-.AddButton {
-  position: relative;
-  left: 971px;
-  height: 10px;
-  width: 80px;
-  line-height: 5px;
-}
+@import "../css/record/record.css";
 </style>

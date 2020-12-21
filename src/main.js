@@ -8,7 +8,19 @@ import axios from 'axios'
 import './components/global.css'
 import echarts from "echarts";
 
-
+import VueAMap from 'vue-amap'
+Vue.use(VueAMap)
+VueAMap.initAMapApiLoader({
+    key: '2eb5edc76474fd10616c908e24ffa766', //高德的key（自己申请）
+    plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch',
+        'AMap.Scale', 'AMap.OverView',
+        'AMap.ToolBar', 'AMap.MapType',
+        'AMap.PolyEditor', 'AMap.CircleEditor',
+        'AMap.Geolocation'
+    ], //引用的插件（根据需要引入）
+    uiVersion: '1.0', //UI库 版本
+    v: '1.4.4', //高德SDK 版本
+})
 
 Vue.use(Element)
 

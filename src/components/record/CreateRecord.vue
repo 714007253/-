@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- 导航 -->
-    <el-card>
+    <el-card class="box-0">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/Welcome' }"
           ><strong>首页</strong>
@@ -14,7 +14,7 @@
       </el-breadcrumb>
     </el-card>
     <!-- 表头 -->
-    <el-card class="box-card">
+    <el-card class="box-card1c">
       <span><strong>新增记录仪</strong></span>
     </el-card>
     <el-card class="box-card2">

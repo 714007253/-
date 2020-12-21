@@ -1,0 +1,76 @@
+.RefreshBox {
+    position: relative;
+    left: 990px;
+    width: 50px;
+    height: 20px;
+}
+
+.RefreshImg {
+    position: relative;
+    top: -8px;
+    left: -15px;
+    width: 13px;
+    height: 15px;
+}
+
+.RefreshTitle {
+    position: relative;
+    font-size: 10px;
+    top: -12px;
+    left: -14px;
+    width: 15px;
+    height: 15px;
+}
+
+
+.box-card1 {
+    width: 1220px;
+    position: relative;
+    left: 15px;
+    top: 20px;
+    height: 125px;
+}
+
+.clearfix {
+    color: #999999;
+    margin-bottom: 10px;
+    height: 10px;
+}
+
+.Reinput {
+    width: 345px;
+}
+
+.InputSearch {
+    width: 235px !important;
+}
+
+.Research {
+    width: 10px;
+    position: relative;
+    left: 66px;
+}
+
+.HightClear {
+    position: relative;
+    left: 977px;
+}
+
+.Reselect {
+    position: relative;
+    left: -27px;
+}
+
+.box-card2 {
+    position: relative;
+    top: 45px;
+    height: 1930px;
+}
+
+.AddButton {
+    position: relative;
+    left: 950px;
+    height: 10px;
+    width: 80px;
+    line-height: 5px !important;
+}

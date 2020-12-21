@@ -1,47 +1,40 @@
-<!-- 记录仪数据列表 -->
+<!-- 电子围栏列表 -->
 <template>
   <div>
-    <!-- 表格 -->
-
+    <div slot="header" class="clearfix">
+      <span><strong>数据列表</strong> </span>
+      <!-- 表格 -->
+    </div>
     <!-- 表单区域 -->
-    <el-table :data="RecordList" stripe style="width: 100%" border>
+    <el-table :data="Enclosurelist" stripe style="width: 100%" border>
       <!-- 数据表单 -->
       <el-table-column type="selection" width="55"> </el-table-column>
 
-      <el-table-column prop="RecordId" label="记录仪编号" width="160">
+      <el-table-column prop="EnclosureName" label="电子围栏名称" width="200">
       </el-table-column>
 
-      <el-table-column prop="RecordStytle" label="记录仪类型" width="100">
+      <el-table-column prop="EnclosureStartTime" label="创建时间" width="240">
       </el-table-column>
 
-      <el-table-column prop="RecordState" label="记录仪状态" width="110">
+      <el-table-column prop="EnclosureAdmin" label="创建人" width="160">
       </el-table-column>
 
-      <el-table-column prop="RecordTemperature" label="冷链包温度" width="100">
+      <el-table-column prop="EnclosureUpdate" label="更新时间" width="240">
       </el-table-column>
 
-      <el-table-column prop="AmbientTemperature" label="环境温度" width="100">
-      </el-table-column>
-
-      <el-table-column prop="BatteryLevel" label="电池电量" width="100">
-      </el-table-column>
-
-      <!-- 状态更改围栏是否能上线 -->
-      <el-table-column prop="mg_state" label="记录仪状态" width="100">
+      <!-- 账户状态更改围栏是否能上线 -->
+      <el-table-column prop="mg_state" label="围栏状态" width="110">
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.mg_state"
-            @change="RecordStateChanged(scope.row)"
+            @change="EnclosureStateChanged(scope.row)"
           >
           </el-switch>
         </template>
       </el-table-column>
 
-      <el-table-column prop="UpdateTime" label="更新时间" width="180">
-      </el-table-column>
-
       <!-- 操作区 -->
-      <el-table-column fixed="right" width="150" label="操作区">
+      <el-table-column fixed="right" width="160" label="操作区">
         <template slot-scope="scope">
           <!-- 查看按钮 -->
           <el-button
@@ -51,17 +44,17 @@
           >
             查看
           </el-button>
+
           <!-- 删除按钮 -->
           <el-button
             size="mini"
             type="danger"
-            @click="removeRecordById(scope.row.id)"
+            @click="removeEnclosureById(scope.row.id)"
             >删除
           </el-button>
         </template>
       </el-table-column>
     </el-table>
-
     <!-- 分页区域 -->
     <el-pagination
       @size-change="handleSizeChange"
@@ -82,54 +75,52 @@ export default {
     return {
       // 获取列表的参数对象
       queryInfo: {
+        // 关键字筛选
+        query: "",
         // 当前页码
         pagenum: 1,
         // 每页显示条数
         pagesize: 10,
       },
       total: 0,
-      RecordList: [
+      // 电子围栏表单
+      Enclosurelist: [
         {
-          RecordId: "",
-          RecordStytle: "",
-          RecordState: "",
-          RecordTemperature: "",
-          AmbientTemperature: "",
-          BatteryLevel: "",
-          UpdateTime: "",
+          EnclosureName: "",
+          EnclosureStartTime: "",
+          EnclosureAdmin: "",
+          EnclosureUpdate: "",
           mg_state: "",
         },
       ],
     };
   },
   created() {
-    this.getRecordList();
+    this.getEnclosureList();
   },
   methods: {
-    // 记录仪数据列表函数获取数据
-    async getRecordList() {
-      const { data: res } = await this.$http.get("Record", {
+    // 获取电子围栏列表
+    async getEnclosureList() {
+      const { data: res } = await this.$http.get("Enclosure", {
         params: this.queryInfo,
       });
       if (res.meta.status !== 200)
-        return this.$message.error("获取记录仪数据列表数据失败");
-      this.RecordList = res.data.Records;
+        return this.$message.error("获取电子围栏表单失败");
+      this.Enclosurelist = res.data.Enclosure;
       this.total = res.data.total;
       console.log(res);
     },
-    // 查看订单
+
+    //   查看
     showEditDialog() {
-      this.$router.push("/CheckRecord");
+      this.$router.push("/CheckEnclosure");
     },
-    // 更改记录仪状态
-    RecordStateChanged() {},
-    // 禁用订单
-    changeEditDialog() {},
-    // 删除订单
-    async removeRecordById(id) {
+
+    // 删除
+    async removeEnclosureById(id) {
       // 弹框询问用户是否删除数据
       const confirmResult = await this.$confirm(
-        "此操作将永久删除该记录仪数据, 是否继续?",
+        "此操作将永久删除该围栏, 是否继续?",
         "提示",
         {
           confirmButtonText: "确定",
@@ -144,28 +135,34 @@ export default {
         return this.$message.info("已取消删除");
       }
 
-      const { data: res } = await this.$http.post("Record/" + id);
+      const { data: res } = await this.$http.post("Enclosure/" + id);
 
       if (res.meta.status !== 200) {
-        return this.$message.error("删除记录仪数据失败！");
+        return this.$message.error("删除围栏失败！");
       }
 
-      this.$message.success("删除记录仪数据成功！");
-      this.getRecordList();
+      this.$message.success("删除围栏成功！");
+      this.getEnclosureList();
     },
-
+    // 账户状态更改
+    EnclosureStateChanged() {},
     // 翻页函数
     handleSizeChange(newSize) {
       this.queryInfo.pagesize = newSize;
-      this.getRecordList();
+      this.getEnclosureList();
     },
     handleCurrentChange(newPage) {
       console.log(newPage);
       this.queryInfo.pagenum = newPage;
-      this.getRecordList();
+      this.getEnclosureList();
     },
   },
 };
 </script>
 <style lang='less' scoped>
+.clearfix {
+  color: #999999;
+  margin-bottom: 40px;
+  height: 10px !important;
+}
 </style>

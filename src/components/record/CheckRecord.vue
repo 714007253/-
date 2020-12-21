@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- 导航 -->
-    <el-card>
+    <el-card class="box-0">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/Welcome' }"
           ><strong>首页</strong>
@@ -30,4 +30,18 @@ export default {
 };
 </script>
 <style lang='less' scoped>
+.box-0 {
+  top: 5px;
+  width: 1190px;
+  position: relative;
+  left: 15px;
+  height: 60px;
+}
+.box-card2 {
+  width: 1190px;
+  position: relative;
+  left: 15px;
+  top: 45px !important;
+  height: 1930px;
+}
 </style>

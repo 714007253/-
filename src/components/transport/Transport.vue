@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- 导航 -->
-    <el-card>
+    <el-card class="box-0">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/Welcome' }"
           ><strong>首页</strong>
@@ -34,7 +34,7 @@
                 @keyup.enter.native="getTransportList"
               ></el-input>
             </el-form-item>
-            <el-form-item label="状态" class="select">
+            <el-form-item label="状态" class="Trselect">
               <el-select v-model="queryInfo.query2">
                 <el-option label="全部" value="1"></el-option>
                 <el-option label="未开始" value="2"></el-option>
@@ -75,7 +75,7 @@
       </div>
       <!-- 地图显示 -->
       <div :class="{ BoxmapShow: BoxmapShowVisable }">
-        <TransportMap></TransportMap>
+        <!-- <TransportMap></TransportMap> -->
       </div>
     </el-card>
   </div>

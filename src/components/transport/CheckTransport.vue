@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- 导航 -->
-    <el-card>
+    <el-card class="box-0">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/Welcome' }"
           ><strong>首页</strong>
@@ -14,7 +14,7 @@
       </el-breadcrumb>
     </el-card>
     <!-- 查看订单内容主体 -->
-    <el-card class="CheckBox">
+    <el-card class="box-card2">
       <span><strong>运输单详情</strong></span>
       <el-form
         label-position="top"
